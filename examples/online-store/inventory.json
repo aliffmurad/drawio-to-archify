@@ -79,7 +79,7 @@
       ],
       "pos": [
         170,
-        90
+        100
       ],
       "size": [
         60,
@@ -131,7 +131,7 @@
       ],
       "pos": [
         170,
-        470
+        560
       ],
       "size": [
         60,
@@ -161,8 +161,8 @@
         }
       ],
       "pos": [
-        910,
-        120
+        1140,
+        140
       ],
       "size": [
         60,
@@ -192,8 +192,8 @@
         }
       ],
       "pos": [
-        1010,
-        120
+        1300,
+        140
       ],
       "size": [
         60,
@@ -223,8 +223,8 @@
         }
       ],
       "pos": [
-        910,
-        300
+        1140,
+        425
       ],
       "size": [
         60,
@@ -254,8 +254,8 @@
         }
       ],
       "pos": [
-        1010,
-        300
+        1300,
+        425
       ],
       "size": [
         60,
@@ -285,8 +285,8 @@
         }
       ],
       "pos": [
-        910,
-        500
+        650,
+        770
       ],
       "size": [
         60,
@@ -321,8 +321,8 @@
         }
       ],
       "pos": [
-        570,
-        120
+        650,
+        140
       ],
       "size": [
         60,
@@ -367,8 +367,8 @@
         }
       ],
       "pos": [
-        445,
-        265
+        565,
+        285
       ],
       "size": [
         60,
@@ -413,8 +413,8 @@
         }
       ],
       "pos": [
-        385,
-        400
+        415,
+        425
       ],
       "size": [
         60,
@@ -459,8 +459,8 @@
         }
       ],
       "pos": [
-        495,
-        400
+        585,
+        425
       ],
       "size": [
         60,
@@ -505,8 +505,8 @@
         }
       ],
       "pos": [
-        385,
-        560
+        415,
+        595
       ],
       "size": [
         60,
@@ -551,54 +551,8 @@
         }
       ],
       "pos": [
-        705,
-        265
-      ],
-      "size": [
-        60,
-        60
-      ]
-    },
-    {
-      "id": "ecs-b",
-      "label": "Store API (Fargate)",
-      "service": "fargate",
-      "glossaryKey": "fargate",
-      "aws": "AWS Fargate",
-      "plain": "Serverless containers",
-      "does": "Runs containers without managing servers.",
-      "layer": "app",
-      "az": "Availability Zone B",
-      "groups": [
-        {
-          "id": "priv-b",
-          "kind": "subnet",
-          "label": "Private subnet"
-        },
-        {
-          "id": "az-b",
-          "kind": "az",
-          "label": "Availability Zone B"
-        },
-        {
-          "id": "vpc",
-          "kind": "vpc",
-          "label": "VPC"
-        },
-        {
-          "id": "region",
-          "kind": "region",
-          "label": "AWS Region: eu-west-1"
-        },
-        {
-          "id": "cloud",
-          "kind": "cloud",
-          "label": "AWS Cloud"
-        }
-      ],
-      "pos": [
-        645,
-        400
+        745,
+        285
       ],
       "size": [
         60,
@@ -643,8 +597,54 @@
         }
       ],
       "pos": [
-        755,
-        400
+        735,
+        425
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "ecs-b",
+      "label": "Store API (Fargate)",
+      "service": "fargate",
+      "glossaryKey": "fargate",
+      "aws": "AWS Fargate",
+      "plain": "Serverless containers",
+      "does": "Runs containers without managing servers.",
+      "layer": "app",
+      "az": "Availability Zone B",
+      "groups": [
+        {
+          "id": "priv-b",
+          "kind": "subnet",
+          "label": "Private subnet"
+        },
+        {
+          "id": "az-b",
+          "kind": "az",
+          "label": "Availability Zone B"
+        },
+        {
+          "id": "vpc",
+          "kind": "vpc",
+          "label": "VPC"
+        },
+        {
+          "id": "region",
+          "kind": "region",
+          "label": "AWS Region: eu-west-1"
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        905,
+        425
       ],
       "size": [
         60,
@@ -689,8 +689,8 @@
         }
       ],
       "pos": [
-        645,
-        560
+        905,
+        595
       ],
       "size": [
         60,
@@ -705,12 +705,12 @@
       "label": "AWS Cloud",
       "parent": null,
       "pos": [
-        120,
+        130,
         20
       ],
       "size": [
-        1000,
-        720
+        1290,
+        900
       ]
     },
     {
@@ -719,12 +719,12 @@
       "label": "AWS Region: eu-west-1",
       "parent": "cloud",
       "pos": [
-        290,
+        300,
         60
       ],
       "size": [
-        810,
-        660
+        1100,
+        840
       ]
     },
     {
@@ -734,11 +734,11 @@
       "parent": "region",
       "pos": [
         330,
-        100
+        90
       ],
       "size": [
-        540,
-        600
+        720,
+        630
       ]
     },
     {
@@ -748,11 +748,11 @@
       "parent": "vpc",
       "pos": [
         350,
-        210
+        240
       ],
       "size": [
-        250,
-        470
+        330,
+        465
       ]
     },
     {
@@ -762,11 +762,11 @@
       "parent": "az-a",
       "pos": [
         365,
-        245
+        265
       ],
       "size": [
-        220,
-        110
+        300,
+        120
       ]
     },
     {
@@ -776,10 +776,10 @@
       "parent": "az-a",
       "pos": [
         365,
-        375
+        400
       ],
       "size": [
-        220,
+        300,
         290
       ]
     },
@@ -789,12 +789,12 @@
       "label": "Availability Zone B",
       "parent": "vpc",
       "pos": [
-        610,
-        210
+        700,
+        240
       ],
       "size": [
-        250,
-        470
+        330,
+        465
       ]
     },
     {
@@ -803,12 +803,12 @@
       "label": "Public subnet",
       "parent": "az-b",
       "pos": [
-        625,
-        245
+        715,
+        265
       ],
       "size": [
-        220,
-        110
+        300,
+        120
       ]
     },
     {
@@ -817,11 +817,11 @@
       "label": "Private subnet",
       "parent": "az-b",
       "pos": [
-        625,
-        375
+        715,
+        400
       ],
       "size": [
-        220,
+        300,
         290
       ]
     }
