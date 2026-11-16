@@ -7,6 +7,24 @@ Turn a technical draw.io AWS architecture into interactive, presentable diagrams
 
 Both views are standalone HTML files made with [Archify](https://github.com/tt-a1i/archify), with dark/light themes, live traffic animation and PNG/SVG/WebM export. The draw.io file stays your source of truth and is never changed.
 
+## Before and after
+
+**Before: the technical draw.io diagram** (`examples/online-store/online-store.drawio`)
+
+![Source draw.io diagram](docs/images/online-store-drawio.png)
+
+The red "internal" price note is planted on purpose. The parser flags it and keeps it out of both views.
+
+**After: executive view** for business owners and management
+
+![Archify executive view](docs/images/online-store-executive.png)
+
+**After: technical view** for architects and engineers
+
+![Archify technical view](docs/images/online-store-technical.png)
+
+The screenshots are still images. Open the HTML files in `examples/online-store/` in a browser to see the animated traffic flow, hover cards and dark/light themes.
+
 ## Why
 
 A draw.io architecture with 150 shapes works for engineers and loses everyone else. Rather than redrawing it, this kit reads it and produces a view for each audience, using only what the drawing actually contains.
