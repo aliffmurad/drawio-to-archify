@@ -1,0 +1,13 @@
+drawio-to-archify
+Copyright (c) 2026 Muhammad Aliff
+Licensed under the MIT License (see LICENSE).
+
+This project prepares input for, and depends on, Archify:
+
+  Archify
+  https://github.com/tt-a1i/archify
+  Copyright (c) tt-a1i
+  Licensed under the Apache License, Version 2.0
+
+Archify is not included in this repository. Install it separately from its
+repository and follow its license and NOTICE terms.

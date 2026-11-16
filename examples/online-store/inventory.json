@@ -1,0 +1,1082 @@
+{
+  "tool": "drawio-inventory",
+  "version": 1,
+  "source": {
+    "file": "online-store.drawio",
+    "page": "Online store",
+    "pages": [
+      "Online store"
+    ]
+  },
+  "summary": {
+    "nodes": 18,
+    "groups": 9,
+    "edges": 18,
+    "annotations": 1,
+    "services": [
+      "AWS Fargate",
+      "AWS Lambda",
+      "AWS WAF",
+      "Amazon Aurora",
+      "Amazon CloudFront",
+      "Amazon CloudWatch",
+      "Amazon Cognito",
+      "Amazon ElastiCache",
+      "Amazon Route 53",
+      "Amazon S3",
+      "Amazon SQS",
+      "Application Load Balancer",
+      "NAT gateway",
+      "Users"
+    ],
+    "regions": [
+      "AWS Region: eu-west-1"
+    ],
+    "availabilityZones": [
+      "Availability Zone A",
+      "Availability Zone B"
+    ],
+    "flags": 2,
+    "unknownServices": 0
+  },
+  "nodes": [
+    {
+      "id": "users",
+      "label": "Shoppers",
+      "service": "users",
+      "glossaryKey": "users",
+      "aws": "Users",
+      "plain": "Users",
+      "does": "People who use the service.",
+      "layer": "people",
+      "az": null,
+      "groups": [],
+      "pos": [
+        30,
+        330
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "route53",
+      "label": "Amazon Route 53",
+      "service": "route_53",
+      "glossaryKey": "route_53",
+      "aws": "Amazon Route 53",
+      "plain": "Web address service (DNS)",
+      "does": "Points your web address to the right place.",
+      "layer": "edge",
+      "az": null,
+      "groups": [
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        170,
+        90
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "cloudfront",
+      "label": "Amazon CloudFront",
+      "service": "cloudfront",
+      "glossaryKey": "cloudfront",
+      "aws": "Amazon CloudFront",
+      "plain": "Global content delivery",
+      "does": "Serves pages from locations close to users so they load fast.",
+      "layer": "edge",
+      "az": null,
+      "groups": [
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        170,
+        330
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "waf",
+      "label": "AWS WAF",
+      "service": "waf",
+      "glossaryKey": "waf",
+      "aws": "AWS WAF",
+      "plain": "Web firewall",
+      "does": "Blocks common web attacks before they reach the app.",
+      "layer": "security",
+      "az": null,
+      "groups": [
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        170,
+        470
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "cognito",
+      "label": "Customer sign-in",
+      "service": "cognito",
+      "glossaryKey": "cognito",
+      "aws": "Amazon Cognito",
+      "plain": "Customer sign-in",
+      "does": "Handles user sign-up and sign-in.",
+      "layer": "identity",
+      "az": null,
+      "groups": [
+        {
+          "id": "region",
+          "kind": "region",
+          "label": "AWS Region: eu-west-1"
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        910,
+        120
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "cloudwatch",
+      "label": "CloudWatch monitoring",
+      "service": "cloudwatch_2",
+      "glossaryKey": "cloudwatch",
+      "aws": "Amazon CloudWatch",
+      "plain": "Monitoring",
+      "does": "Collects metrics, logs and alarms.",
+      "layer": "ops",
+      "az": null,
+      "groups": [
+        {
+          "id": "region",
+          "kind": "region",
+          "label": "AWS Region: eu-west-1"
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        1010,
+        120
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "sqs",
+      "label": "Order queue",
+      "service": "sqs",
+      "glossaryKey": "sqs",
+      "aws": "Amazon SQS",
+      "plain": "Work queue",
+      "does": "Holds tasks until a worker is ready.",
+      "layer": "integration",
+      "az": null,
+      "groups": [
+        {
+          "id": "region",
+          "kind": "region",
+          "label": "AWS Region: eu-west-1"
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        910,
+        300
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "lambda",
+      "label": "Order worker",
+      "service": "lambda",
+      "glossaryKey": "lambda",
+      "aws": "AWS Lambda",
+      "plain": "On-demand code",
+      "does": "Runs code only when it is needed.",
+      "layer": "app",
+      "az": null,
+      "groups": [
+        {
+          "id": "region",
+          "kind": "region",
+          "label": "AWS Region: eu-west-1"
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        1010,
+        300
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "s3",
+      "label": "Static assets bucket",
+      "service": "s3",
+      "glossaryKey": "s3",
+      "aws": "Amazon S3",
+      "plain": "File storage",
+      "does": "Stores files, images and documents.",
+      "layer": "storage",
+      "az": null,
+      "groups": [
+        {
+          "id": "region",
+          "kind": "region",
+          "label": "AWS Region: eu-west-1"
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        910,
+        500
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "alb",
+      "label": "Application Load Balancer",
+      "service": "application_load_balancer",
+      "glossaryKey": "application_load_balancer",
+      "aws": "Application Load Balancer",
+      "plain": "Traffic distributor",
+      "does": "Spreads requests across healthy servers.",
+      "layer": "edge",
+      "az": null,
+      "groups": [
+        {
+          "id": "vpc",
+          "kind": "vpc",
+          "label": "VPC"
+        },
+        {
+          "id": "region",
+          "kind": "region",
+          "label": "AWS Region: eu-west-1"
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        570,
+        120
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "nat-a",
+      "label": "NAT gateway",
+      "service": "nat_gateway",
+      "glossaryKey": "nat_gateway",
+      "aws": "NAT gateway",
+      "plain": "Outbound internet access",
+      "does": "Lets private servers reach the internet without being reachable from it.",
+      "layer": "network",
+      "az": "Availability Zone A",
+      "groups": [
+        {
+          "id": "pub-a",
+          "kind": "subnet",
+          "label": "Public subnet"
+        },
+        {
+          "id": "az-a",
+          "kind": "az",
+          "label": "Availability Zone A"
+        },
+        {
+          "id": "vpc",
+          "kind": "vpc",
+          "label": "VPC"
+        },
+        {
+          "id": "region",
+          "kind": "region",
+          "label": "AWS Region: eu-west-1"
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        445,
+        265
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "ecs-a",
+      "label": "Store API (Fargate)",
+      "service": "fargate",
+      "glossaryKey": "fargate",
+      "aws": "AWS Fargate",
+      "plain": "Serverless containers",
+      "does": "Runs containers without managing servers.",
+      "layer": "app",
+      "az": "Availability Zone A",
+      "groups": [
+        {
+          "id": "priv-a",
+          "kind": "subnet",
+          "label": "Private subnet"
+        },
+        {
+          "id": "az-a",
+          "kind": "az",
+          "label": "Availability Zone A"
+        },
+        {
+          "id": "vpc",
+          "kind": "vpc",
+          "label": "VPC"
+        },
+        {
+          "id": "region",
+          "kind": "region",
+          "label": "AWS Region: eu-west-1"
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        385,
+        400
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "cache-a",
+      "label": "ElastiCache Redis (primary)",
+      "service": "elasticache",
+      "glossaryKey": "elasticache",
+      "aws": "Amazon ElastiCache",
+      "plain": "Speed-up cache",
+      "does": "Keeps frequently used data in memory for speed.",
+      "layer": "data",
+      "az": "Availability Zone A",
+      "groups": [
+        {
+          "id": "priv-a",
+          "kind": "subnet",
+          "label": "Private subnet"
+        },
+        {
+          "id": "az-a",
+          "kind": "az",
+          "label": "Availability Zone A"
+        },
+        {
+          "id": "vpc",
+          "kind": "vpc",
+          "label": "VPC"
+        },
+        {
+          "id": "region",
+          "kind": "region",
+          "label": "AWS Region: eu-west-1"
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        495,
+        400
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "aurora-w",
+      "label": "Aurora PostgreSQL (writer)",
+      "service": "aurora",
+      "glossaryKey": "aurora",
+      "aws": "Amazon Aurora",
+      "plain": "Main database",
+      "does": "Stores the core business records.",
+      "layer": "data",
+      "az": "Availability Zone A",
+      "groups": [
+        {
+          "id": "priv-a",
+          "kind": "subnet",
+          "label": "Private subnet"
+        },
+        {
+          "id": "az-a",
+          "kind": "az",
+          "label": "Availability Zone A"
+        },
+        {
+          "id": "vpc",
+          "kind": "vpc",
+          "label": "VPC"
+        },
+        {
+          "id": "region",
+          "kind": "region",
+          "label": "AWS Region: eu-west-1"
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        385,
+        560
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "nat-b",
+      "label": "NAT gateway",
+      "service": "nat_gateway",
+      "glossaryKey": "nat_gateway",
+      "aws": "NAT gateway",
+      "plain": "Outbound internet access",
+      "does": "Lets private servers reach the internet without being reachable from it.",
+      "layer": "network",
+      "az": "Availability Zone B",
+      "groups": [
+        {
+          "id": "pub-b",
+          "kind": "subnet",
+          "label": "Public subnet"
+        },
+        {
+          "id": "az-b",
+          "kind": "az",
+          "label": "Availability Zone B"
+        },
+        {
+          "id": "vpc",
+          "kind": "vpc",
+          "label": "VPC"
+        },
+        {
+          "id": "region",
+          "kind": "region",
+          "label": "AWS Region: eu-west-1"
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        705,
+        265
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "ecs-b",
+      "label": "Store API (Fargate)",
+      "service": "fargate",
+      "glossaryKey": "fargate",
+      "aws": "AWS Fargate",
+      "plain": "Serverless containers",
+      "does": "Runs containers without managing servers.",
+      "layer": "app",
+      "az": "Availability Zone B",
+      "groups": [
+        {
+          "id": "priv-b",
+          "kind": "subnet",
+          "label": "Private subnet"
+        },
+        {
+          "id": "az-b",
+          "kind": "az",
+          "label": "Availability Zone B"
+        },
+        {
+          "id": "vpc",
+          "kind": "vpc",
+          "label": "VPC"
+        },
+        {
+          "id": "region",
+          "kind": "region",
+          "label": "AWS Region: eu-west-1"
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        645,
+        400
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "cache-b",
+      "label": "ElastiCache Redis (replica)",
+      "service": "elasticache",
+      "glossaryKey": "elasticache",
+      "aws": "Amazon ElastiCache",
+      "plain": "Speed-up cache",
+      "does": "Keeps frequently used data in memory for speed.",
+      "layer": "data",
+      "az": "Availability Zone B",
+      "groups": [
+        {
+          "id": "priv-b",
+          "kind": "subnet",
+          "label": "Private subnet"
+        },
+        {
+          "id": "az-b",
+          "kind": "az",
+          "label": "Availability Zone B"
+        },
+        {
+          "id": "vpc",
+          "kind": "vpc",
+          "label": "VPC"
+        },
+        {
+          "id": "region",
+          "kind": "region",
+          "label": "AWS Region: eu-west-1"
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        755,
+        400
+      ],
+      "size": [
+        60,
+        60
+      ]
+    },
+    {
+      "id": "aurora-r",
+      "label": "Aurora PostgreSQL (reader)",
+      "service": "aurora",
+      "glossaryKey": "aurora",
+      "aws": "Amazon Aurora",
+      "plain": "Main database",
+      "does": "Stores the core business records.",
+      "layer": "data",
+      "az": "Availability Zone B",
+      "groups": [
+        {
+          "id": "priv-b",
+          "kind": "subnet",
+          "label": "Private subnet"
+        },
+        {
+          "id": "az-b",
+          "kind": "az",
+          "label": "Availability Zone B"
+        },
+        {
+          "id": "vpc",
+          "kind": "vpc",
+          "label": "VPC"
+        },
+        {
+          "id": "region",
+          "kind": "region",
+          "label": "AWS Region: eu-west-1"
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud",
+          "label": "AWS Cloud"
+        }
+      ],
+      "pos": [
+        645,
+        560
+      ],
+      "size": [
+        60,
+        60
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "id": "cloud",
+      "kind": "cloud",
+      "label": "AWS Cloud",
+      "parent": null,
+      "pos": [
+        120,
+        20
+      ],
+      "size": [
+        1000,
+        720
+      ]
+    },
+    {
+      "id": "region",
+      "kind": "region",
+      "label": "AWS Region: eu-west-1",
+      "parent": "cloud",
+      "pos": [
+        290,
+        60
+      ],
+      "size": [
+        810,
+        660
+      ]
+    },
+    {
+      "id": "vpc",
+      "kind": "vpc",
+      "label": "VPC",
+      "parent": "region",
+      "pos": [
+        330,
+        100
+      ],
+      "size": [
+        540,
+        600
+      ]
+    },
+    {
+      "id": "az-a",
+      "kind": "az",
+      "label": "Availability Zone A",
+      "parent": "vpc",
+      "pos": [
+        350,
+        210
+      ],
+      "size": [
+        250,
+        470
+      ]
+    },
+    {
+      "id": "pub-a",
+      "kind": "subnet",
+      "label": "Public subnet",
+      "parent": "az-a",
+      "pos": [
+        365,
+        245
+      ],
+      "size": [
+        220,
+        110
+      ]
+    },
+    {
+      "id": "priv-a",
+      "kind": "subnet",
+      "label": "Private subnet",
+      "parent": "az-a",
+      "pos": [
+        365,
+        375
+      ],
+      "size": [
+        220,
+        290
+      ]
+    },
+    {
+      "id": "az-b",
+      "kind": "az",
+      "label": "Availability Zone B",
+      "parent": "vpc",
+      "pos": [
+        610,
+        210
+      ],
+      "size": [
+        250,
+        470
+      ]
+    },
+    {
+      "id": "pub-b",
+      "kind": "subnet",
+      "label": "Public subnet",
+      "parent": "az-b",
+      "pos": [
+        625,
+        245
+      ],
+      "size": [
+        220,
+        110
+      ]
+    },
+    {
+      "id": "priv-b",
+      "kind": "subnet",
+      "label": "Private subnet",
+      "parent": "az-b",
+      "pos": [
+        625,
+        375
+      ],
+      "size": [
+        220,
+        290
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-users-cf",
+      "source": "users",
+      "target": "cloudfront",
+      "label": "HTTPS",
+      "dashed": false
+    },
+    {
+      "id": "e-users-dns",
+      "source": "users",
+      "target": "route53",
+      "label": "DNS",
+      "dashed": true
+    },
+    {
+      "id": "e-waf-cf",
+      "source": "waf",
+      "target": "cloudfront",
+      "label": "filters requests",
+      "dashed": false
+    },
+    {
+      "id": "e-cf-s3",
+      "source": "cloudfront",
+      "target": "s3",
+      "label": "static assets",
+      "dashed": false
+    },
+    {
+      "id": "e-cf-alb",
+      "source": "cloudfront",
+      "target": "alb",
+      "label": "dynamic requests",
+      "dashed": false
+    },
+    {
+      "id": "e-alb-ecs-a",
+      "source": "alb",
+      "target": "ecs-a",
+      "label": null,
+      "dashed": false
+    },
+    {
+      "id": "e-alb-ecs-b",
+      "source": "alb",
+      "target": "ecs-b",
+      "label": null,
+      "dashed": false
+    },
+    {
+      "id": "e-ecs-a-db",
+      "source": "ecs-a",
+      "target": "aurora-w",
+      "label": "SQL",
+      "dashed": false
+    },
+    {
+      "id": "e-ecs-b-db",
+      "source": "ecs-b",
+      "target": "aurora-r",
+      "label": "read SQL",
+      "dashed": false
+    },
+    {
+      "id": "e-db-repl",
+      "source": "aurora-w",
+      "target": "aurora-r",
+      "label": "replication",
+      "dashed": true
+    },
+    {
+      "id": "e-ecs-cache",
+      "source": "ecs-a",
+      "target": "cache-a",
+      "label": "session cache",
+      "dashed": false
+    },
+    {
+      "id": "e-cache-repl",
+      "source": "cache-a",
+      "target": "cache-b",
+      "label": "replication",
+      "dashed": true
+    },
+    {
+      "id": "e-ecs-nat-a",
+      "source": "ecs-a",
+      "target": "nat-a",
+      "label": "outbound updates",
+      "dashed": true
+    },
+    {
+      "id": "e-ecs-nat-b",
+      "source": "ecs-b",
+      "target": "nat-b",
+      "label": "outbound updates",
+      "dashed": true
+    },
+    {
+      "id": "e-ecs-cognito",
+      "source": "ecs-b",
+      "target": "cognito",
+      "label": "verify token",
+      "dashed": false
+    },
+    {
+      "id": "e-ecs-sqs",
+      "source": "ecs-b",
+      "target": "sqs",
+      "label": "order events",
+      "dashed": true
+    },
+    {
+      "id": "e-sqs-lambda",
+      "source": "sqs",
+      "target": "lambda",
+      "label": "triggers",
+      "dashed": false
+    },
+    {
+      "id": "e-lambda-db",
+      "source": "lambda",
+      "target": "aurora-w",
+      "label": "update order",
+      "dashed": false
+    }
+  ],
+  "report": {
+    "danglingEdges": [],
+    "groupEndpoints": [],
+    "folds": [
+      {
+        "key": "nat_gateway|nat gateway",
+        "label": "NAT gateway",
+        "service": "nat_gateway",
+        "count": 2,
+        "members": [
+          "nat-a",
+          "nat-b"
+        ],
+        "memberLabels": [
+          "NAT gateway",
+          "NAT gateway"
+        ],
+        "azs": [
+          "Availability Zone A",
+          "Availability Zone B"
+        ],
+        "internalEdges": []
+      },
+      {
+        "key": "fargate|store api fargate",
+        "label": "Store API (Fargate)",
+        "service": "fargate",
+        "count": 2,
+        "members": [
+          "ecs-a",
+          "ecs-b"
+        ],
+        "memberLabels": [
+          "Store API (Fargate)",
+          "Store API (Fargate)"
+        ],
+        "azs": [
+          "Availability Zone A",
+          "Availability Zone B"
+        ],
+        "internalEdges": []
+      },
+      {
+        "key": "elasticache|elasticache redis",
+        "label": "ElastiCache Redis",
+        "service": "elasticache",
+        "count": 2,
+        "members": [
+          "cache-a",
+          "cache-b"
+        ],
+        "memberLabels": [
+          "ElastiCache Redis (primary)",
+          "ElastiCache Redis (replica)"
+        ],
+        "azs": [
+          "Availability Zone A",
+          "Availability Zone B"
+        ],
+        "internalEdges": [
+          "e-cache-repl"
+        ]
+      },
+      {
+        "key": "aurora|aurora postgresql",
+        "label": "Aurora PostgreSQL",
+        "service": "aurora",
+        "count": 2,
+        "members": [
+          "aurora-w",
+          "aurora-r"
+        ],
+        "memberLabels": [
+          "Aurora PostgreSQL (writer)",
+          "Aurora PostgreSQL (reader)"
+        ],
+        "azs": [
+          "Availability Zone A",
+          "Availability Zone B"
+        ],
+        "internalEdges": [
+          "e-db-repl"
+        ]
+      }
+    ],
+    "unconnectedNodes": [
+      {
+        "id": "cloudwatch",
+        "label": "CloudWatch monitoring"
+      }
+    ],
+    "unknownServices": [],
+    "flags": [
+      {
+        "id": "note",
+        "where": "text",
+        "kind": "price",
+        "text": "Est. USD 3,200 / month (internal)"
+      },
+      {
+        "id": "note",
+        "where": "text",
+        "kind": "internal-wording",
+        "text": "Est. USD 3,200 / month (internal)"
+      }
+    ],
+    "annotations": [
+      {
+        "id": "note",
+        "text": "Est. USD 3,200 / month (internal)"
+      }
+    ],
+    "omittedFromExecutive": [
+      {
+        "id": "nat-a",
+        "label": "NAT gateway",
+        "layer": "network"
+      },
+      {
+        "id": "nat-b",
+        "label": "NAT gateway",
+        "layer": "network"
+      }
+    ]
+  }
+}

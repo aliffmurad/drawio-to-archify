@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Online store - how it works",
+    "output": "executive/online-store-executive.html",
+    "quality_profile": "showcase",
+    "locale": "en"
+  },
+  "components": [
+    {
+      "id": "blk-people",
+      "type": "external",
+      "label": "Shoppers",
+      "sublabel": "Use the service",
+      "icon": "person",
+      "pos": [
+        40,
+        200
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "blk-edge",
+      "type": "cloud",
+      "label": "Front door",
+      "sublabel": "Fast, managed entry point",
+      "icon": "cloud",
+      "pos": [
+        340,
+        200
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "blk-security",
+      "type": "security",
+      "label": "Protection",
+      "sublabel": "Guards against threats",
+      "icon": "security",
+      "pos": [
+        340,
+        40
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "blk-identity",
+      "type": "security",
+      "label": "Sign-in",
+      "sublabel": "Checks who users are",
+      "icon": "security",
+      "pos": [
+        640,
+        40
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "blk-app",
+      "type": "backend",
+      "label": "Application",
+      "sublabel": "Runs the business service",
+      "icon": "backend",
+      "pos": [
+        640,
+        200
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "blk-data",
+      "type": "database",
+      "label": "Business data",
+      "sublabel": "Stores and serves records",
+      "icon": "database",
+      "pos": [
+        940,
+        200
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "blk-storage",
+      "type": "database",
+      "label": "Files & content",
+      "sublabel": "Stores files and media",
+      "icon": "database",
+      "pos": [
+        340,
+        360
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "blk-integration",
+      "type": "messagebus",
+      "label": "Background work",
+      "sublabel": "Finishes tasks behind the scenes",
+      "icon": "messagebus",
+      "pos": [
+        640,
+        360
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "blk-ops",
+      "type": "cloud",
+      "label": "Monitoring",
+      "sublabel": "Watches system health",
+      "icon": "cloud",
+      "pos": [
+        940,
+        40
+      ],
+      "size": [
+        160,
+        64
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Hosted on AWS (eu-west-1)",
+      "wraps": [
+        "blk-edge",
+        "blk-security",
+        "blk-identity",
+        "blk-app",
+        "blk-data",
+        "blk-storage",
+        "blk-integration",
+        "blk-ops"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "people-to-edge",
+      "from": "blk-people",
+      "to": "blk-edge",
+      "label": "visits",
+      "variant": "emphasis"
+    },
+    {
+      "id": "security-to-edge",
+      "from": "blk-security",
+      "to": "blk-edge",
+      "label": "protects",
+      "variant": "security"
+    },
+    {
+      "id": "edge-to-storage",
+      "from": "blk-edge",
+      "to": "blk-storage",
+      "label": "fetches files"
+    },
+    {
+      "id": "edge-to-app",
+      "from": "blk-edge",
+      "to": "blk-app",
+      "label": "sends requests"
+    },
+    {
+      "id": "app-to-data",
+      "from": "blk-app",
+      "to": "blk-data",
+      "label": "reads & saves"
+    },
+    {
+      "id": "app-to-identity",
+      "from": "blk-app",
+      "to": "blk-identity",
+      "label": "checks sign-in"
+    },
+    {
+      "id": "app-to-integration",
+      "from": "blk-app",
+      "to": "blk-integration",
+      "label": "hands off work"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "slate",
+      "title": "What's inside",
+      "items": [
+        "Front door: Amazon Route 53, Amazon CloudFront, Application Load Balancer",
+        "Protection: AWS WAF",
+        "Sign-in: Amazon Cognito",
+        "Application: AWS Lambda, AWS Fargate",
+        "Business data: Amazon ElastiCache, Amazon Aurora",
+        "Files & content: Amazon S3",
+        "Background work: Amazon SQS",
+        "Monitoring: Amazon CloudWatch"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resilience",
+      "items": [
+        "Key parts run in 2 separate Availability Zones (isolated data centre groups)",
+        "Duplicated across zones: Store API (Fargate), ElastiCache Redis, Aurora PostgreSQL"
+      ]
+    }
+  ]
+}

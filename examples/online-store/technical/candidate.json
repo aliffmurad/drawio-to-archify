@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Online store - technical architecture",
+    "output": "technical/online-store-technical.html",
+    "quality_profile": "showcase",
+    "locale": "en"
+  },
+  "components": [
+    { "id": "route53", "type": "cloud", "label": "Route 53", "sublabel": "DNS", "pos": [40, 40], "size": [130, 64] },
+    { "id": "users", "type": "external", "label": "Shoppers", "sublabel": "users", "icon": "person", "pos": [40, 200], "size": [130, 64] },
+    { "id": "waf", "type": "security", "label": "AWS WAF", "sublabel": "web firewall", "pos": [295, 40], "size": [130, 64] },
+    { "id": "cloudfront", "type": "cloud", "label": "CloudFront", "sublabel": "CDN", "pos": [295, 200], "size": [130, 64] },
+    { "id": "cognito", "type": "security", "label": "Cognito", "sublabel": "customer sign-in", "pos": [550, 40], "size": [130, 64] },
+    { "id": "alb", "type": "cloud", "label": "Load Balancer", "sublabel": "Application (ALB)", "pos": [550, 200], "size": [130, 64] },
+    { "id": "s3", "type": "cloud", "label": "S3", "sublabel": "static assets", "pos": [550, 360], "size": [130, 64] },
+    { "id": "cache", "type": "database", "label": "ElastiCache", "sublabel": "Redis", "tag": "primary + replica", "pos": [805, 40], "size": [130, 64] },
+    { "id": "api", "type": "backend", "label": "Store API", "sublabel": "AWS Fargate", "tag": "2 AZs", "pos": [805, 200], "size": [130, 64] },
+    { "id": "sqs", "type": "messagebus", "label": "SQS", "sublabel": "order queue", "pos": [805, 360], "size": [130, 64] },
+    { "id": "aurora", "type": "database", "label": "Aurora", "sublabel": "PostgreSQL", "tag": "writer + reader", "pos": [1060, 200], "size": [130, 64] },
+    { "id": "lambda", "type": "backend", "label": "Lambda", "sublabel": "order worker", "pos": [1060, 360], "size": [130, 64] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "AWS Region: eu-west-1", "wraps": ["cognito", "alb", "s3", "cache", "api", "sqs", "aurora", "lambda"] }
+  ],
+  "connections": [
+    { "id": "users-https", "from": "users", "to": "cloudfront", "label": "HTTPS", "variant": "emphasis" },
+    { "id": "users-dns", "from": "users", "to": "route53", "label": "DNS", "variant": "dashed" },
+    { "id": "waf-filters", "from": "waf", "to": "cloudfront", "label": "filters requests", "variant": "security" },
+    { "id": "cf-dynamic", "from": "cloudfront", "to": "alb", "label": "dynamic requests", "variant": "emphasis" },
+    { "id": "cf-static", "from": "cloudfront", "to": "s3", "label": "static assets" },
+    { "id": "alb-api", "from": "alb", "to": "api", "variant": "emphasis" },
+    { "id": "api-sql", "from": "api", "to": "aurora", "label": "SQL", "variant": "emphasis" },
+    { "id": "api-cache", "from": "api", "to": "cache", "label": "session cache" },
+    { "id": "api-token", "from": "api", "to": "cognito", "label": "verify token", "variant": "security" },
+    { "id": "api-events", "from": "api", "to": "sqs", "label": "order events", "variant": "dashed" },
+    { "id": "sqs-trigger", "from": "sqs", "to": "lambda", "label": "triggers" },
+    { "id": "lambda-update", "from": "lambda", "to": "aurora", "label": "update order" }
+  ],
+  "cards": [
+    { "dot": "violet", "title": "Network", "items": ["VPC spans Availability Zone A and B, each with a public and a private subnet", "Load balancer, Store API, ElastiCache and Aurora are in the VPC", "One NAT gateway per AZ carries outbound updates from the Store API"] },
+    { "dot": "emerald", "title": "Resilience", "items": ["Store API runs in both AZs behind the load balancer", "Aurora writer (AZ A) replicates to a reader (AZ B); the AZ B API reads from it", "ElastiCache primary (AZ A) replicates to a replica (AZ B)"] },
+    { "dot": "rose", "title": "Edge", "items": ["Route 53, CloudFront and WAF sit outside the Region box in the source drawing", "WAF filters requests at CloudFront"] },
+    { "dot": "slate", "title": "Also in the drawing", "items": ["CloudWatch monitoring (no connections drawn)"] }
+  ]
+}
